@@ -10,7 +10,8 @@ ARG AWS_GROUP=aws
 ARG AWS_UID=1000
 ARG AWS_GID=1000
 
-RUN pip install --no-cache-dir awscli==${AWSCLI_VERSION} && \
+RUN apk add --no-cache groff && \
+    pip install --no-cache-dir awscli==${AWSCLI_VERSION} && \
     addgroup -g ${AWS_GID} -S ${AWS_GROUP} && \
     adduser -u ${AWS_UID} -S ${AWS_USER} -G ${AWS_GROUP} && \
     mkdir /home/${AWS_USER}/work && \
