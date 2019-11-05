@@ -70,7 +70,7 @@ The IAM approach does not require any secrets / credentials to be stored on the 
 To build a custom image for a specific version of the AWS CLI, Python or Alpine use the following syntax:
 
 ```
-docker image build --build-arg AWSCLI_VERSION=1.16.274 . -t aws-cli:1.16.274-alpine
+docker image build --build-arg AWSCLI_VERSION=1.16.274 . -t aws-cli:1.16.274
 ```
 
 You can provide overrides for the following:
