@@ -10,7 +10,7 @@ ARG AWS_GROUP=aws
 ARG AWS_UID=1000
 ARG AWS_GID=1000
 
-RUN apk add --no-cache groff && \
+RUN apk add --no-cache groff tini=~0.18 && \
     pip install --no-cache-dir awscli==${AWSCLI_VERSION} && \
     addgroup -g ${AWS_GID} -S ${AWS_GROUP} && \
     adduser -u ${AWS_UID} -S ${AWS_USER} -G ${AWS_GROUP} && \
@@ -20,5 +20,6 @@ RUN apk add --no-cache groff && \
 USER ${AWS_USER}
 WORKDIR /home/${AWS_USER}/work
 
-ENTRYPOINT ["aws"]
+# Wait for CMD to exit, reap zombies and perform signal forwarding
+ENTRYPOINT ["/sbin/tini", "--", "aws"]
 CMD ["help"]
