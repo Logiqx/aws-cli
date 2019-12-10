@@ -4,9 +4,9 @@ The AWS Command Line Interface (CLI) is a unified tool to manage your AWS servic
 
 This image has been created to satisfy the following requirements:
 
-- Based off an official Python image on Alpine Linux - Python 3.9 + Alpine 3.10
-- Uses a specific release of the AWS CLI - 1.16.299
-- Avoids using the root user - uid=1000(aws) gid=1000(aws)
+- Use official Python base images - Alpine and Debian (slim)
+- Use specific release of the AWS CLI
+- Avoid running as the root user
 
 
 
@@ -25,6 +25,16 @@ docker container run -it --rm logiqx/aws-cli [options] <command> <subcommand> [<
 ```
 
 Note: The "aws" portion of the command is not required because it is specified in the ENTRYPOINT.
+
+
+
+### Using the Debian Image
+
+The Debian image is used in much the same way as the Alpine image by specifying the appropriate tag:
+
+```
+docker container run -it --rm logiqx/aws-cli:slim
+```
 
 
 
@@ -73,11 +83,16 @@ To build a custom image for a specific version of the AWS CLI, Python or Alpine 
 docker image build --build-arg AWSCLI_VERSION=1.16.299 . -t aws-cli:1.16.299
 ```
 
+To build a custom Debian image simply use Dockerfile-slim instead of Dockerfile:
+
+```
+docker image build --file Dockerfile-slim --build-arg AWSCLI_VERSION=1.16.299 . -t aws-cli:1.16.299-slim
+```
+
 You can provide overrides for the following:
 
 - AWSCLI_VERSION - default of 1.16.299
 - PYTHON_VERSION - default of 3.8
-- ALPINE_VERSION - default of 3.10
+- ALPINE_VERSION / DEBIAN_VERSION  - default of 3.10 / buster
 - AWS_USER and AWS_GROUP - default of aws
 - AWS_UID and AWS_GID - default of 1000
-
