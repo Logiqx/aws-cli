@@ -10,7 +10,7 @@ ARG AWS_GROUP=aws
 ARG AWS_UID=1000
 ARG AWS_GID=1000
 
-RUN apk add --no-cache groff tini=~0.18 && \
+RUN apk add --no-cache tini=~0.18 groff && \
     pip install --no-cache-dir awscli==${AWSCLI_VERSION} && \
     addgroup -g ${AWS_GID} ${AWS_GROUP} && \
     adduser -u ${AWS_UID} --disabled-password ${AWS_USER} -G ${AWS_GROUP} && \
