@@ -28,7 +28,7 @@ Note: The "aws" portion of the command is not required because it is specified i
 
 
 
-### Using the Debian Image
+#### Using the Debian Image
 
 The Debian image is used in much the same way as the Alpine image by specifying the appropriate tag:
 
