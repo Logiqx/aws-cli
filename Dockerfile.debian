@@ -1,0 +1,25 @@
+ARG PYTHON_VERSION=3.8
+ARG DEBIAN_VERSION=buster
+FROM python:${PYTHON_VERSION}-slim-${DEBIAN_VERSION}
+
+ARG AWSCLI_VERSION=1.16.299
+RUN apt-get update && apt-get install -y --no-install-recommends tini=0.18.* groff && \
+    rm -rf /var/lib/apt/lists/* && \
+    pip install --no-cache-dir awscli==${AWSCLI_VERSION}
+
+ARG AWS_USER=aws
+ARG AWS_GROUP=aws
+ARG AWS_UID=1000
+ARG AWS_GID=1000
+
+RUN groupadd -g ${AWS_GID} ${AWS_GROUP} && \
+    useradd -u ${AWS_UID} ${AWS_USER} -g ${AWS_GROUP} && \
+    mkdir -p /home/${AWS_USER}/work && \
+    chown -R ${AWS_USER}:${AWS_GROUP} /home/${AWS_USER}
+
+USER ${AWS_USER}
+WORKDIR /home/${AWS_USER}/work
+
+# Wait for CMD to exit, reap zombies and perform signal forwarding
+ENTRYPOINT ["/usr/bin/tini", "--", "aws"]
+CMD ["help"]
