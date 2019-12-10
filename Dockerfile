@@ -12,8 +12,8 @@ ARG AWS_GID=1000
 
 RUN apk add --no-cache groff tini=~0.18 && \
     pip install --no-cache-dir awscli==${AWSCLI_VERSION} && \
-    addgroup -g ${AWS_GID} -S ${AWS_GROUP} && \
-    adduser -u ${AWS_UID} -S ${AWS_USER} -G ${AWS_GROUP} && \
+    addgroup -g ${AWS_GID} ${AWS_GROUP} && \
+    adduser -u ${AWS_UID} --disabled-password ${AWS_USER} -G ${AWS_GROUP} && \
     mkdir /home/${AWS_USER}/work && \
     chown ${AWS_USER}:${AWS_GROUP} /home/${AWS_USER}/work
 
