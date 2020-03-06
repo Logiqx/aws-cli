@@ -2,7 +2,7 @@ ARG PYTHON_VERSION=3.8
 ARG DEBIAN_VERSION=buster
 FROM python:${PYTHON_VERSION}-slim-${DEBIAN_VERSION}
 
-ARG AWSCLI_VERSION=1.16.299
+ARG AWSCLI_VERSION=1.18.*
 RUN apt-get update && apt-get install -y --no-install-recommends tini=0.18.* groff && \
     rm -rf /var/lib/apt/lists/* && \
     pip install --no-cache-dir awscli==${AWSCLI_VERSION}

@@ -1,8 +1,8 @@
 ARG PYTHON_VERSION=3.8
-ARG ALPINE_VERSION=3.10
+ARG ALPINE_VERSION=3.11
 FROM python:${PYTHON_VERSION}-alpine${ALPINE_VERSION}
 
-ARG AWSCLI_VERSION=1.16.299
+ARG AWSCLI_VERSION=1.18.*
 RUN apk add --no-cache tini=~0.18 groff && \
     pip install --no-cache-dir awscli==${AWSCLI_VERSION}
 
