@@ -80,19 +80,19 @@ The IAM approach does not require any secrets / credentials to be stored on the 
 To build a custom image for a specific version of the AWS CLI, Python or Alpine use the following syntax:
 
 ```
-docker image build --build-arg AWSCLI_VERSION=1.18.* . -t aws-cli:1.18
+docker image build --build-arg AWSCLI_VERSION=1.19.* . -t aws-cli:1.19
 ```
 
 To build a custom Debian image simply use Dockerfile-slim instead of Dockerfile:
 
 ```
-docker image build --file Dockerfile-slim --build-arg AWSCLI_VERSION=1.18.* . -t aws-cli:1.18-slim
+docker image build --file Dockerfile-slim --build-arg AWSCLI_VERSION=1.19.* . -t aws-cli:1.19-slim
 ```
 
 You can provide overrides for the following:
 
-- AWSCLI_VERSION - default of 1.18.*
-- PYTHON_VERSION - default of 3.8
-- ALPINE_VERSION / DEBIAN_VERSION  - default of 3.11 / buster
+- AWSCLI_VERSION - default of 1.19.*
+- PYTHON_VERSION - default of 3.9
+- ALPINE_VERSION / DEBIAN_VERSION  - default of 3.13 / buster
 - AWS_USER and AWS_GROUP - default of aws
 - AWS_UID and AWS_GID - default of 1000
