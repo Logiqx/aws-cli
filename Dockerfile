@@ -1,10 +1,12 @@
 ARG PYTHON_VERSION=3.9
-ARG ALPINE_VERSION=3.13
+ARG ALPINE_VERSION=3.12
 FROM python:${PYTHON_VERSION}-alpine${ALPINE_VERSION}
 
 ARG AWSCLI_VERSION=1.19.*
-RUN apk add --no-cache tini=~0.19 groff && \
-    pip install --no-cache-dir awscli==${AWSCLI_VERSION}
+RUN apk add --no-cache \
+    groff \
+    tini=~0.19 \
+    && pip install --no-cache-dir awscli==${AWSCLI_VERSION}
 
 ARG AWS_USER=aws
 ARG AWS_GROUP=aws
