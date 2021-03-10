@@ -3,9 +3,11 @@ ARG DEBIAN_VERSION=buster
 FROM python:${PYTHON_VERSION}-slim-${DEBIAN_VERSION}
 
 ARG AWSCLI_VERSION=1.19.*
-RUN apt-get update && apt-get install -y --no-install-recommends tini=0.18.* groff && \
-    rm -rf /var/lib/apt/lists/* && \
-    pip install --no-cache-dir awscli==${AWSCLI_VERSION}
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    groff \
+    tini=0.18.* \
+    && rm -rf /var/lib/apt/lists/* \
+    && pip install --no-cache-dir awscli==${AWSCLI_VERSION}
 
 ARG AWS_USER=aws
 ARG AWS_GROUP=aws
