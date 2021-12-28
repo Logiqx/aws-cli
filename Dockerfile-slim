@@ -1,11 +1,11 @@
-ARG PYTHON_VERSION=3.9
-ARG DEBIAN_VERSION=buster
+ARG PYTHON_VERSION=3.10
+ARG DEBIAN_VERSION=bullseye
 FROM python:${PYTHON_VERSION}-slim-${DEBIAN_VERSION}
 
-ARG AWSCLI_VERSION=1.19.*
+ARG AWSCLI_VERSION=1.22.*
 RUN apt-get update && apt-get install -y --no-install-recommends \
     groff \
-    tini=0.18.* \
+    tini=0.19.* \
     && rm -rf /var/lib/apt/lists/* \
     && pip install --no-cache-dir awscli==${AWSCLI_VERSION}
 
