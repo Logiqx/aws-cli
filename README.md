@@ -86,7 +86,7 @@ docker image build --build-arg AWSCLI_VERSION=1.22.* . -t aws-cli:1.22-alpine3.1
 To build a custom Debian image simply use Dockerfile-slim instead of Dockerfile:
 
 ```
-docker image build --file Dockerfile-slim --build-arg AWSCLI_VERSION=1.22.* . -t aws-cli:1.22-slim-bullseye
+docker image build --build-arg AWSCLI_VERSION=1.22.* . -f Dockerfile-slim -t aws-cli:1.22-slim-bullseye
 ```
 
 You can provide overrides for the following:
